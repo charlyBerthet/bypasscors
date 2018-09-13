@@ -28,7 +28,7 @@ app.get('/api/fetch/', async (req, res) => {
     try{
         res.send( await fetch.get(req.query.url));
     } catch(e){
-        res.statusCode(500);
+        res.status(500);
         res.send(e);
     }
 });
