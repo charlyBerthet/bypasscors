@@ -5,6 +5,7 @@ exports.get = url => {
         if(!url){
             return reject("Missing query param 'url'.");
         }
+        console.log("fetch", url);
         request({
             method: "GET",
             url : url,
