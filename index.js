@@ -54,6 +54,8 @@ app.get('/api/', async (req, res) => {
 app.post('/api/', async (req, res) => {
     try{
         var content = await fetch.post(req.query.url, req.body.data, req.body.headers);
+
+        // Try to add cookies in header
         if(content.headers["set-cookie"]){
             try{
                 var cookies = {};
@@ -61,11 +63,8 @@ app.post('/api/', async (req, res) => {
                     var val = content.headers["set-cookie"][k];
                     console.log("cookie", k, val);
                     var firstVal = val.match(/^([a-zA-z]+)=(["a-zA-Z0-9%_\.]*);/);
-                    //var maxAge = val.match(/Max\-Age=(["a-zA-Z0-9%_\.]*);/);
-                    //console.log(val, firstVal, maxAge);
                     if(firstVal && firstVal.length > 2) {
                         cookies[firstVal[1]||""] = firstVal[2] || "";
-                        //res.cookie(firstVal[1]||"",firstVal[2] || "", { maxAge: maxAge && maxAge[1] ? maxAge[1] : 900000, httpOnly: true });
                     }else {
                         console.log("error with cookie", val);
                     }
