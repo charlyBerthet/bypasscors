@@ -37,7 +37,7 @@ app.use(function(req, res, next) {
 //
 app.get('/api/fetch/', async (req, res) => {
     try{
-        res.send( await fetch.get(req.query.url, req.headers));
+        res.send( await fetch.get(req.query.url));
     } catch(e){
         res.status(500);
         res.send(e);
@@ -45,7 +45,7 @@ app.get('/api/fetch/', async (req, res) => {
 });
 app.get('/api/', async (req, res) => {
     try{
-        res.send( await fetch.get(req.query.url, req.headers));
+        res.send( await fetch.get(req.query.url));
     } catch(e){
         res.status(500);
         res.send(e);
@@ -53,7 +53,7 @@ app.get('/api/', async (req, res) => {
 });
 app.post('/api/', async (req, res) => {
     try{
-        res.send( await fetch.post(req.query.url, req.headers, req.body));
+        res.send( await fetch.post(req.query.url, req.body));
     } catch(e){
         res.status(500);
         res.send(e);

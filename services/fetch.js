@@ -1,14 +1,12 @@
 const request = require('request');
 
-var buildHeaders = headers => {
-    if(!headers){
-        headers = {};
-    }
+var buildHeaders = () => {
+    var headers = {};
     headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36';
     return headers;
 };
 
-exports.get = (url, headers) => {
+exports.get = (url) => {
     return new Promise((resolve, reject) => {
         if(!url){
             return reject("Missing query param 'url'.");
@@ -19,7 +17,7 @@ exports.get = (url, headers) => {
         request({
             method: "GET",
             url : url,
-            headers: buildHeaders(headers)
+            headers: buildHeaders()
         }, function(error, response, data){
             if(error){
                 reject(error);
@@ -31,7 +29,7 @@ exports.get = (url, headers) => {
 } ;
 
 
-exports.post = (url, headers, params) => {
+exports.post = (url, params) => {
     return new Promise((resolve, reject) => {
         if(!url){
             return reject("Missing query param 'url'.");
@@ -41,7 +39,7 @@ exports.post = (url, headers, params) => {
             method: "POST",
             url : url,
             json: params,
-            headers: buildHeaders(headers)
+            headers: buildHeaders()
         }, function(error, response, data){
             if(error){
                 reject(error);
