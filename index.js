@@ -54,10 +54,11 @@ app.get('/api/', async (req, res) => {
 app.post('/api/', async (req, res) => {
     try{
         var content = await fetch.post(req.query.url, req.body.data, req.body.headers);
-        for(var k in content.headers){
+        /*for(var k in content.headers){
             console.log("headers", k, content.headers[k]);
             res.header(k, content.headers[k]);
-        }
+        }*/
+        res.header("set-cookie","test");
         res.send( content.data );
     } catch(e){
         res.status(500);
