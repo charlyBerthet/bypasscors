@@ -55,10 +55,13 @@ app.post('/api/', async (req, res) => {
     try{
         var content = await fetch.post(req.query.url, req.body.data, req.body.headers);
         if(content.headers["set-cookie"]){
-            console.log("cookie", content.headers["set-cookie"]);
+            for(var k in content.headers["set-cookie"]){
+                var val = content.headers["set-cookie"][k];
+                var firstVal = val.match(/^([a-zA-z]+)=(["a-zA-Z0-9%_\.]*);/);
+                var maxAge = val.match(/Max\-Age=(["a-zA-Z0-9%_\.]*);/);
+                res.cookie(firstVal[1]||"",firstVal[2] || "", { maxAge: maxAge[1]||900000, httpOnly: true })
+            }
         }
-        //res.header("set-cookie","test");
-        //res.cookie()
         res.send( content.data );
     } catch(e){
         res.status(500);
