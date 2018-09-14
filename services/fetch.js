@@ -46,12 +46,11 @@ exports.post = (url, params, headers) => {
             opt.json = params;
         }
 
-        console.log("post options", opt);
-
         request(opt, function(error, response, data){
             if(error){
                 reject(error);
             } else {
+                console.log("post res headers", response.headers);
                 resolve(data);
             }
         });
