@@ -45,7 +45,6 @@ exports.post = (url, params, headers) => {
         } else {
             opt.json = params;
         }
-        console.log("fetch post opt", opt);
 
         request(opt, function(error, response, data){
             if(error){

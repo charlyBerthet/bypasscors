@@ -1,6 +1,7 @@
 const express = require('express');
 const fetch = require("./services/fetch");
 var bodyParser = require('body-parser');
+var instagram = require("./services/instagram");
 
 // Create Express app
 const app = express();
@@ -33,7 +34,12 @@ app.use(function(req, res, next) {
 });
 
 //
-// API Routes
+// Instagram API Routes
+//
+app.use("/api/instagram", instagram.router);
+
+//
+// Bypass API Routes
 //
 app.get('/api/fetch/', async (req, res) => {
     try{
@@ -54,26 +60,6 @@ app.get('/api/', async (req, res) => {
 app.post('/api/', async (req, res) => {
     try{
         var content = await fetch.post(req.query.url, req.body.data, req.body.headers);
-
-        // Try to add cookies in header
-        if(content.headers["set-cookie"]){
-            try{
-                var cookies = {};
-                for(var k in content.headers["set-cookie"]){
-                    var val = content.headers["set-cookie"][k];
-                    console.log("cookie", k, val);
-                    var firstVal = val.match(/^([a-zA-z]+)=(["a-zA-Z0-9%_\.]*);/);
-                    if(firstVal && firstVal.length > 2) {
-                        cookies[firstVal[1]||""] = firstVal[2] || "";
-                    }else {
-                        console.log("error with cookie", val);
-                    }
-                }
-                res.header("forwarded-cookies", JSON.stringify(cookies));
-            }catch(e){
-                console.log(e);
-            }
-        }
         res.send( content.data );
     } catch(e){
         res.status(500);
