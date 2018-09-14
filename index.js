@@ -1,11 +1,18 @@
 const express = require('express');
 const fetch = require("./services/fetch");
+var bodyParser = require('body-parser');
 
 // Create Express app
 const app = express();
 
 // Allow EJS
 app.set('view engine', 'ejs');
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 // Allow CORS
 app.use(function(req, res, next) {
@@ -17,7 +24,11 @@ app.use(function(req, res, next) {
 // Allow DEBUG query params
 app.use(function(req, res, next) {
     if(req.query.debug){
-        res.send(req.query);
+        res.send({
+            query_params : req.query,
+            body_params: req.body,
+            headers: req.headers
+        });
     } else { next(); }
 });
 
@@ -27,6 +38,22 @@ app.use(function(req, res, next) {
 app.get('/api/fetch/', async (req, res) => {
     try{
         res.send( await fetch.get(req.query.url));
+    } catch(e){
+        res.status(500);
+        res.send(e);
+    }
+});
+app.get('/api/', async (req, res) => {
+    try{
+        res.send( await fetch.get(req.query.url, req.headers));
+    } catch(e){
+        res.status(500);
+        res.send(e);
+    }
+});
+app.post('/api/', async (req, res) => {
+    try{
+        res.send( await fetch.post(req.query.url, req.headers, req.body));
     } catch(e){
         res.status(500);
         res.send(e);

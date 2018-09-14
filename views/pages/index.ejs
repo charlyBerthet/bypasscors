@@ -28,13 +28,13 @@
             <h3>Get Started</h3>
             <div class="text">
                 <p>
-                    Each time you need to fetch an external website that need CORS to be enabled, simply call "https://bypasscors.herokuapp.com/api/fetch/?url=YOURURL".
+                    Each time you need to fetch an external website that need CORS to be enabled, simply call "https://bypasscors.herokuapp.com/api/?url=YOURURL".
                 </p>
                 <p>
                     Let's say you want to access https://facebook.com, unfortunately facebook do not enabled CORS from anonymous websites.
                     You can bypass CORS error by calling :
                     <div class="add-bg">
-                        https://bypasscors.herokuapp.com/api/fetch/?url=https://facebook.com
+                        https://bypasscors.herokuapp.com/api/?url=https://facebook.com
                     </div>
                 </p>
 
@@ -46,7 +46,7 @@
                  </p>
                 <small>
                     <code>
-                        var url = "https://bypasscors.herokuapp.com/api/fetch/?url=" + encodeURIComponent("https://facebook.com");
+                        var url = "https://bypasscors.herokuapp.com/api/?url=" + encodeURIComponent("https://facebook.com");
                         <br/>
                         yourGetMethod(url);
                     </code>
