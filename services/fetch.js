@@ -41,7 +41,7 @@ exports.post = (url, params, headers) => {
 
         console.log("fetch post", url);
         if(headers && (headers["content-type"] == "application/x-www-form-urlencoded" || headers["Content-type"] == "application/x-www-form-urlencoded" || headers["Content-Type"] == "application/x-www-form-urlencoded")){
-            opt.data = params;
+            opt.body = params;
         } else {
             opt.json = params;
         }
