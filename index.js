@@ -59,6 +59,7 @@ app.post('/api/', async (req, res) => {
                 var cookies = {};
                 for(var k in content.headers["set-cookie"]){
                     var val = content.headers["set-cookie"][k];
+                    console.log("cookie", k, val);
                     var firstVal = val.match(/^([a-zA-z]+)=(["a-zA-Z0-9%_\.]*);/);
                     //var maxAge = val.match(/Max\-Age=(["a-zA-Z0-9%_\.]*);/);
                     //console.log(val, firstVal, maxAge);
@@ -73,7 +74,6 @@ app.post('/api/', async (req, res) => {
             }catch(e){
                 console.log(e);
             }
-            console.log("cookies", res.cookies);
         }
         res.send( content.data );
     } catch(e){
