@@ -60,6 +60,7 @@ app.post('/api/', async (req, res) => {
                     var val = content.headers["set-cookie"][k];
                     var firstVal = val.match(/^([a-zA-z]+)=(["a-zA-Z0-9%_\.]*);/);
                     var maxAge = val.match(/Max\-Age=(["a-zA-Z0-9%_\.]*);/);
+                    console.log(val, firstVal, maxAge);
                     res.cookie(firstVal[1]||"",firstVal[2] || "", { maxAge: maxAge[1]||900000, httpOnly: true })
                 }
             }catch(e){
