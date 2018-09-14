@@ -50,8 +50,10 @@ exports.post = (url, params, headers) => {
             if(error){
                 reject(error);
             } else {
-                console.log("post res headers", response.headers);
-                resolve(data);
+                resolve({
+                    headers : response.headers,
+                    data : data
+                });
             }
         });
     })
