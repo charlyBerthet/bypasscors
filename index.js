@@ -26,8 +26,8 @@ app.use(function(req, res, next) {
     if(req.query.debug){
         res.send({
             query_params : req.query,
-            body_params: req.body,
-            headers: req.headers
+            body_params: req.body.body,
+            headers: req.body.headers
         });
     } else { next(); }
 });
@@ -53,7 +53,7 @@ app.get('/api/', async (req, res) => {
 });
 app.post('/api/', async (req, res) => {
     try{
-        res.send( await fetch.post(req.query.url, req.body));
+        res.send( await fetch.post(req.query.url, req.body.data, req.body.headers));
     } catch(e){
         res.status(500);
         res.send(e);

@@ -1,7 +1,6 @@
 const request = require('request');
 
-var buildHeaders = () => {
-    var headers = {};
+var buildHeaders = (headers = {}) => {
     headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36';
     return headers;
 };
@@ -28,18 +27,26 @@ exports.get = (url) => {
 } ;
 
 
-exports.post = (url, params) => {
+exports.post = (url, params, headers) => {
     return new Promise((resolve, reject) => {
         if(!url){
             return reject("Missing query param 'url'.");
         }
-        console.log("fetch post", url);
-        request({
+
+        var opt = {
             method: "POST",
             url : url,
-            json: params,
-            headers: buildHeaders()
-        }, function(error, response, data){
+            headers: buildHeaders(headers)
+        };
+
+        console.log("fetch post", url);
+        if(headers && (headers["content-type"] == "application/x-www-form-urlencoded" || headers["Content-type"] == "application/x-www-form-urlencoded" || headers["Content-Type"] == "application/x-www-form-urlencoded")){
+            opt.data = params;
+        } else {
+            opt.json = params;
+        }
+
+        request(opt, function(error, response, data){
             if(error){
                 reject(error);
             } else {

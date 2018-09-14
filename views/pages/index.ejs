@@ -54,15 +54,52 @@
             </div>
         </section>
 
+        <section>
+            <h3>A little documentation</h3>
+            <div class="text">
+                <p>Perform GET request</p>
+                <small>
+                    <code>
+                        Method : GET
+                        <br/>
+                        Endpoint : "https://bypasscors.herokuapp.com/api/?url=YOUR_URL"
+                    </code>
+                </small>
+
+                <p>Perform POST request</p>
+                <small>
+                    <code>
+                        Method : POST
+                        <br/>
+                        Endpoint : "https://bypasscors.herokuapp.com/api/?url=YOUR_URL"
+                        <br/>
+                        Body : {data: YOUR_DATA_OBJECT_OR_STRING, headers: YOUR_HEADERS_OBJECT}
+                    </code>
+                </small>
+                <p>
+                    A little trick for POST requests. We use body request to send headers in order to bypass CORS restrictions.
+                </p>
+                <p>
+                    That way the body json look like :
+                </p>
+                <small>
+                    <code>
+                        {
+                            data:YOUR_DATA_OBJECT_OR_STRING,
+                            headers:YOUR_HEADERS_OBJECT
+                        }
+                    </code>
+                </small>
+            </div>
+        </section>
 
         <section>
             <h3>Limitations</h3>
             <div class="text">
-                <p>We currently support only GET requests.</p>
+                <p>We currently support only GET and POST requests.</p>
                 <p>This is a FREE API, you may experience some delay or interruption.</p>
             </div>
         </section>
-
 
         <section>
             <h3>Need help ?</h3>
