@@ -26,7 +26,7 @@ app.use(function(req, res, next) {
     if(req.query.debug){
         res.send({
             query_params : req.query,
-            body_params: req.body.body,
+            body_params: req.body.data,
             headers: req.body.headers
         });
     } else { next(); }
