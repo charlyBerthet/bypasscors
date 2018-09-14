@@ -58,7 +58,7 @@ app.post('/api/', async (req, res) => {
             console.log("headers", k, content.headers[k]);
             res.header(k, content.headers[k]);
         }*/
-        res.header("set-cookie","test");
+        res.header("test","test");
         res.send( content.data );
     } catch(e){
         res.status(500);
