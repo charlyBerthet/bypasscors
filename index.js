@@ -55,6 +55,7 @@ app.post('/api/', async (req, res) => {
     try{
         var content = await fetch.post(req.query.url, req.body.data, req.body.headers);
         for(var k in content.headers){
+            console.log("headers", k, content.headers[k]);
             res.header(k, content.headers[k]);
         }
         res.send( content.data );
