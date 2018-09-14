@@ -13,7 +13,6 @@ exports.get = (url) => {
         }
         console.log("fetch get", url);
 
-        headers.
         request({
             method: "GET",
             url : url,
