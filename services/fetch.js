@@ -31,7 +31,7 @@ exports.get = (url, headers) => {
 } ;
 
 
-exports.post = (url, params) => {
+exports.post = (url, headers, params) => {
     return new Promise((resolve, reject) => {
         if(!url){
             return reject("Missing query param 'url'.");

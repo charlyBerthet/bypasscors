@@ -37,7 +37,7 @@ app.use(function(req, res, next) {
 //
 app.get('/api/fetch/', async (req, res) => {
     try{
-        res.send( await fetch.get(req.query.url));
+        res.send( await fetch.get(req.query.url, req.headers));
     } catch(e){
         res.status(500);
         res.send(e);
