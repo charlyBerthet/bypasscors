@@ -1,5 +1,5 @@
 var Client = require('instagram-private-api').V1;
-var device = new Client.Device('testdelamort' + (new Date()).getTime());
+var device = new Client.Device('testdelamortOK');
 var storage = new Client.CookieFileStorage(__dirname + '/someuser.json');
 
 var express = require('express')
@@ -9,10 +9,14 @@ var router = express.Router()
 router.post('/auth', function (req, res) {
     Client.Session.create(device, storage, req.body.username, req.body.password)
     .then(function(session) {
-        res.send({"authenticated":true});
+        session.getAccount()
+            .then((account) => {
+                res.send({"authenticated":false, "account":account});
+            });
     }, err => {
+        console.log(err);
         res.status(500);
-        res.send(err);
+        res.send({"authenticated":false});
     });
 });
 
